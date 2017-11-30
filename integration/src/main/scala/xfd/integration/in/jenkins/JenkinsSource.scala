@@ -12,7 +12,7 @@ import akka.http.scaladsl.model.headers.BasicHttpCredentials
 import akka.http.scaladsl.unmarshalling.Unmarshal
 import akka.stream._
 import akka.stream.scaladsl._
-import xfd.integration.in.jenkins.model.JobWithDetails
+import xfd.integration.in.jenkins.model.{BuildWithDetails, JobWithDetails}
 
 object JenkinsSource extends JsonSupport {
 
@@ -21,7 +21,7 @@ object JenkinsSource extends JsonSupport {
       system: ActorSystem,
       materializer: ActorMaterializer,
       executionContext: ExecutionContext
-  ): Source[JobWithDetails, Cancellable] = {
+  ): Source[(JobWithDetails, Option[BuildWithDetails]), Cancellable] = {
 
     val jenkinsSettings = JenkinsSettings(system.settings.config)
 
@@ -33,38 +33,65 @@ object JenkinsSource extends JsonSupport {
         )
       )
 
-    val pollRequest =
+    def request(uri: String) =
       HttpRequest(
-        uri = Uri("https://jenkins.znx.fr/job/bnp-welcome/api/json"),
+        uri = Uri(s"${jenkinsSettings.rootUrl}/$uri"),
         headers = immutable.Seq(authorizationHeader)
       )
+
+    val pollRequest = request(s"job/${jenkinsSettings.jobName}/api/json")
+
+    def buildRequest(number: Int) =
+      request(s"job/${jenkinsSettings.jobName}/$number/api/json")
 
     Source
       .tick(0.seconds, jenkinsSettings.interval, ())
       .map(_ => println("tick!"))
       .mapAsync(1)(_ => Http().singleRequest(pollRequest))
-      .map { httpResponse =>
-        println(s"httpResponse: $httpResponse")
-        httpResponse
-      }
+//      .map { httpResponse =>
+//        println(s"httpResponse: $httpResponse")
+//        httpResponse
+//      }
       .mapAsync(1) {
         case HttpResponse(StatusCodes.OK, _, entity, _) =>
           Unmarshal(entity)
             .to[JobWithDetails]
             .recover {
               case NonFatal(t) =>
-                println("Error : " + t)
+                println("JobWithDetails parsing error : " + t)
                 throw t
             }
             .map(Some(_))
         case _ =>
           Future.successful(None)
       }
-      .map { parsedResponse =>
-        println(s"parsedResponse: $parsedResponse")
-        parsedResponse
+//      .map { parsedResponse =>
+//        println(s"parsedResponse: $parsedResponse")
+//        parsedResponse
+//      }
+      .collect { case Some(job) => job }
+      .mapAsync(1) { job =>
+        job.lastCompletedBuild match {
+          case Some(build) =>
+            Http()
+              .singleRequest(buildRequest(build.number))
+              .map(build => (job, Some(build)))
+          case _ => Future.successful((job, None))
+        }
       }
-      .collect { case Some(jsObject) => jsObject }
+      .mapAsync(1) {
+        case (job, Some(HttpResponse(StatusCodes.OK, _, entity, _))) =>
+          Unmarshal(entity)
+            .to[BuildWithDetails]
+            .recover {
+              case NonFatal(t) =>
+                println("JobWithDetails parsing error : " + t)
+                throw t
+            }
+            .map(build => (job, Some(build)))
+        case (job, _) =>
+          Future.successful((job, None))
+      }
   }
 
 }

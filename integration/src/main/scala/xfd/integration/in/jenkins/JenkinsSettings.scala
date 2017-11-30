@@ -14,7 +14,11 @@ case class JenkinsSettings(conf: Config) {
     FiniteDuration(dur, TimeUnit.MILLISECONDS)
   }
 
+  val rootUrl: String = conf.getString(s"$rootPath.rootUrl")
+
   val username: String = conf.getString(s"$rootPath.username")
 
   val password: String = conf.getString(s"$rootPath.password")
+
+  val jobName: String = conf.getString(s"$rootPath.jobName")
 }

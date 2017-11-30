@@ -1,5 +1,6 @@
 lazy val akkaHttpVersion = "10.0.10"
 lazy val akkaVersion = "2.5.7"
+lazy val enumeratumVersion = "1.5.12"
 
 organization in ThisBuild := "io.zengularity"
 
@@ -60,10 +61,14 @@ scalafmtOnCompile in ThisBuild := true
 lazy val root = (project in file(".")).settings(
   name := "akka-stream",
   libraryDependencies ++= Seq(
+    // Akka
     "com.typesafe.akka" %% "akka-http" % akkaHttpVersion,
     "com.typesafe.akka" %% "akka-http-spray-json" % akkaHttpVersion,
     "com.typesafe.akka" %% "akka-http-xml" % akkaHttpVersion,
     "com.typesafe.akka" %% "akka-stream" % akkaVersion,
+    // Enumeratum
+    "com.beachape" %% "enumeratum" % enumeratumVersion,
+    // Tests
     "com.typesafe.akka" %% "akka-http-testkit" % akkaHttpVersion % Test,
     "com.typesafe.akka" %% "akka-testkit" % akkaVersion % Test,
     "com.typesafe.akka" %% "akka-stream-testkit" % akkaVersion % Test,
