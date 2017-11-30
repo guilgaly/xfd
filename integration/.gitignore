@@ -1,0 +1,80 @@
+*.class
+*.log
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+
+########## Node.js ##########
+node_modules
+
+########## SBT ##########
+.cache
+.history
+.lib/
+dist/
+target/
+lib_managed/
+src_managed/
+project/boot/
+project/plugins/project/
+project/project
+project/target
+.sbtserver
+.sbtserver.lock
+
+########## ENSIME ##########
+.ensime_cache/
+.ensime
+
+########## Eclipse ##########
+.metadata
+bin/
+tmp/
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.settings/
+.loadpath
+.recommenders
+.cache
+.buildpath
+# Eclipse Core
+.project
+# External tool builders
+.externalToolBuilders/
+# Locally stored "Eclipse launch configurations"
+*.launch
+# JDT-specific (Eclipse Java Development Tools)
+.classpath
+# Java annotation processor (APT)
+.factorypath
+# sbteclipse plugin
+.target
+# Code Recommenders
+.recommenders/
+# Scala-IDE specific
+.scala_dependencies
+
+########## Jetbrains (IDEA) ##########
+# User-specific stuff:
+.idea/
+.idea/*
+# File-based project format:
+*.iws
+*.iml
+# IntelliJ
+/out/
+# mpeltonen/sbt-idea plugin
+.idea_modules/
+
+########## Others ##########
+logs
+/RUNNING_PID
+# hidden cross project folders
+shared/.js
+shared/.jvm
+# temp files
+.~*
+*~
+*.orig
