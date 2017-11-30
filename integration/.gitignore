@@ -78,3 +78,5 @@ shared/.jvm
 .~*
 *~
 *.orig
+
+/src/main/resources/local.conf

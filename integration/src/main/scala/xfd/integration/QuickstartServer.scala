@@ -12,8 +12,10 @@ import akka.stream.ActorMaterializer
 import xfd.integration.admin.AdminRoutes
 import xfd.integration.core.IntegrationRoutes
 
-//#main-class
-object QuickstartServer extends App with AdminRoutes with IntegrationRoutes {
+/**
+  * Main class
+  */
+object QuickstartServer extends App with AdminRoutes {
 
   // set up ActorSystem and other dependencies here
   implicit val system: ActorSystem = ActorSystem("helloAkkaHttpServer")
@@ -31,7 +33,7 @@ object QuickstartServer extends App with AdminRoutes with IntegrationRoutes {
     Http().bindAndHandle(routes, "localhost", 8080)
 
   // integration routes
-  runIntegrationRoutes()
+  IntegrationRoutes.runIntegrationRoutes()
 
   println(s"Server online at http://localhost:8080/\nPress RETURN to stop...")
 
