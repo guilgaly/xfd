@@ -1,0 +1,73 @@
+[0m[[0m[0mdebug[0m] [0m[0mInvalidating /Users/cbu/projects/hackday/extreme-feedback/device/lib/kaa-java-ep-sdk-WnLLuD1z5U1w66VUb8CmXR4lCcY.jar: class org.kaaproject.kaa.common.endpoint.gen.SubscriptionType now provided by /Users/cbu/projects/hackday/extreme-feedback/device/lib/kaa-java-ep-sdk-u74stAz17uTTvn4tbkhWyuCv1m8.jar[0m
+[0m[[0m[0mdebug[0m] [0m[0m[0m
+[0m[[0m[0mdebug[0m] [0m[0mInitial source changes: [0m
+[0m[[0m[0mdebug[0m] [0m[0m	removed:Set()[0m
+[0m[[0m[0mdebug[0m] [0m[0m	added: Set()[0m
+[0m[[0m[0mdebug[0m] [0m[0m	modified: Set()[0m
+[0m[[0m[0mdebug[0m] [0m[0mInvalidated products: Set()[0m
+[0m[[0m[0mdebug[0m] [0m[0mExternal API changes: API Changes: Set()[0m
+[0m[[0m[0mdebug[0m] [0m[0mModified binary dependencies: Set(/Users/cbu/projects/hackday/extreme-feedback/device/lib/kaa-java-ep-sdk-WnLLuD1z5U1w66VUb8CmXR4lCcY.jar)[0m
+[0m[[0m[0mdebug[0m] [0m[0mInitial directly invalidated classes: Set()[0m
+[0m[[0m[0mdebug[0m] [0m[0m[0m
+[0m[[0m[0mdebug[0m] [0m[0mSources indirectly invalidated by:[0m
+[0m[[0m[0mdebug[0m] [0m[0m	product: Set()[0m
+[0m[[0m[0mdebug[0m] [0m[0m	binary dep: Set(/Users/cbu/projects/hackday/extreme-feedback/device/src/main/scala/Application.scala)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	external source: Set()[0m
+[0m[[0m[0mdebug[0m] [0m[0mAll sources are invalidated.[0m
+[0m[[0m[0mdebug[0m] [0m[0mRecompiling all 1 sources: invalidated sources (1) exceeded 50.0% of all sources[0m
+[0m[[0m[0minfo[0m] [0m[0mCompiling 1 Scala source to /Users/cbu/projects/hackday/extreme-feedback/device/target/scala-2.12/classes ...[0m
+[0m[[0m[0mdebug[0m] [0m[0mGetting org.scala-sbt:compiler-bridge_2.12:1.0.5:compile for Scala 2.12.4[0m
+[0m[[0m[0mdebug[0m] [0m[0mGetting org.scala-sbt:compiler-bridge_2.12:1.0.5:compile for Scala 2.12.4[0m
+[0m[[0m[0mdebug[0m] [0m[0m[zinc] Running cached compiler 1509f0bc for Scala compiler version 2.12.4[0m
+[0m[[0m[0mdebug[0m] [0m[0m[zinc] The Scala compiler is invoked with:[0m
+[0m[[0m[0mdebug[0m] [0m[0m	-deprecation[0m
+[0m[[0m[0mdebug[0m] [0m[0m	-encoding[0m
+[0m[[0m[0mdebug[0m] [0m[0m	utf-8[0m
+[0m[[0m[0mdebug[0m] [0m[0m	-explaintypes[0m
+[0m[[0m[0mdebug[0m] [0m[0m	-feature[0m
+[0m[[0m[0mdebug[0m] [0m[0m	-language:existentials[0m
+[0m[[0m[0mdebug[0m] [0m[0m	-language:experimental.macros[0m
+[0m[[0m[0mdebug[0m] [0m[0m	-language:higherKinds[0m
+[0m[[0m[0mdebug[0m] [0m[0m	-language:implicitConversions[0m
+[0m[[0m[0mdebug[0m] [0m[0m	-unchecked[0m
+[0m[[0m[0mdebug[0m] [0m[0m	-Xcheckinit[0m
+[0m[[0m[0mdebug[0m] [0m[0m	-Xfatal-warnings[0m
+[0m[[0m[0mdebug[0m] [0m[0m	-Xfuture[0m
+[0m[[0m[0mdebug[0m] [0m[0m	-Xlint:adapted-args[0m
+[0m[[0m[0mdebug[0m] [0m[0m	-Xlint:by-name-right-associative[0m
+[0m[[0m[0mdebug[0m] [0m[0m	-Xlint:constant[0m
+[0m[[0m[0mdebug[0m] [0m[0m	-Xlint:delayedinit-select[0m
+[0m[[0m[0mdebug[0m] [0m[0m	-Xlint:doc-detached[0m
+[0m[[0m[0mdebug[0m] [0m[0m	-Xlint:inaccessible[0m
+[0m[[0m[0mdebug[0m] [0m[0m	-Xlint:infer-any[0m
+[0m[[0m[0mdebug[0m] [0m[0m	-Xlint:missing-interpolator[0m
+[0m[[0m[0mdebug[0m] [0m[0m	-Xlint:nullary-override[0m
+[0m[[0m[0mdebug[0m] [0m[0m	-Xlint:nullary-unit[0m
+[0m[[0m[0mdebug[0m] [0m[0m	-Xlint:option-implicit[0m
+[0m[[0m[0mdebug[0m] [0m[0m	-Xlint:package-object-classes[0m
+[0m[[0m[0mdebug[0m] [0m[0m	-Xlint:poly-implicit-overload[0m
+[0m[[0m[0mdebug[0m] [0m[0m	-Xlint:private-shadow[0m
+[0m[[0m[0mdebug[0m] [0m[0m	-Xlint:stars-align[0m
+[0m[[0m[0mdebug[0m] [0m[0m	-Xlint:type-parameter-shadow[0m
+[0m[[0m[0mdebug[0m] [0m[0m	-Xlint:unsound-match[0m
+[0m[[0m[0mdebug[0m] [0m[0m	-Yno-adapted-args[0m
+[0m[[0m[0mdebug[0m] [0m[0m	-Ypartial-unification[0m
+[0m[[0m[0mdebug[0m] [0m[0m	-Ywarn-dead-code[0m
+[0m[[0m[0mdebug[0m] [0m[0m	-Ywarn-extra-implicit[0m
+[0m[[0m[0mdebug[0m] [0m[0m	-Ywarn-inaccessible[0m
+[0m[[0m[0mdebug[0m] [0m[0m	-Ywarn-infer-any[0m
+[0m[[0m[0mdebug[0m] [0m[0m	-Ywarn-nullary-override[0m
+[0m[[0m[0mdebug[0m] [0m[0m	-Ywarn-nullary-unit[0m
+[0m[[0m[0mdebug[0m] [0m[0m	-Ywarn-numeric-widen[0m
+[0m[[0m[0mdebug[0m] [0m[0m	-Ywarn-unused:implicits[0m
+[0m[[0m[0mdebug[0m] [0m[0m	-Ywarn-unused:locals[0m
+[0m[[0m[0mdebug[0m] [0m[0m	-Ywarn-unused:params[0m
+[0m[[0m[0mdebug[0m] [0m[0m	-Ywarn-unused:patvars[0m
+[0m[[0m[0mdebug[0m] [0m[0m	-Ywarn-unused:privates[0m
+[0m[[0m[0mdebug[0m] [0m[0m	-Ywarn-value-discard[0m
+[0m[[0m[0mdebug[0m] [0m[0m	-bootclasspath[0m
+[0m[[0m[0mdebug[0m] [0m[0m	/Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/jre/lib/resources.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/jre/lib/rt.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/jre/lib/sunrsasign.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/jre/lib/jsse.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/jre/lib/jce.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/jre/lib/charsets.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/jre/lib/jfr.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/jre/classes:/Users/cbu/.sbt/boot/scala-2.12.4/lib/scala-library.jar[0m
+[0m[[0m[0mdebug[0m] [0m[0m	-classpath[0m
+[0m[[0m[0mdebug[0m] [0m[0m	/Users/cbu/projects/hackday/extreme-feedback/device/target/scala-2.12/classes:/Users/cbu/projects/hackday/extreme-feedback/device/lib/kaa-java-ep-sdk-u74stAz17uTTvn4tbkhWyuCv1m8.jar:/Users/cbu/.ivy2/cache/com.beachape/enumeratum-play_2.12/jars/enumeratum-play_2.12-1.5.12.jar:/Users/cbu/.ivy2/cache/com.beachape/enumeratum-play-json_2.12/jars/enumeratum-play-json_2.12-1.5.12.jar:/Users/cbu/.ivy2/cache/com.typesafe.play/play-json_2.12/jars/play-json_2.12-2.6.0.jar:/Users/cbu/.ivy2/cache/com.typesafe.play/play-functional_2.12/jars/play-functional_2.12-2.6.0.jar:/Users/cbu/.sbt/boot/scala-2.12.4/lib/scala-reflect.jar:/Users/cbu/.ivy2/cache/org.typelevel/macro-compat_2.12/jars/macro-compat_2.12-1.1.1.jar:/Users/cbu/.ivy2/cache/joda-time/joda-time/jars/joda-time-2.9.9.jar:/Users/cbu/.ivy2/cache/com.beachape/enumeratum_2.12/jars/enumeratum_2.12-1.5.12.jar:/Users/cbu/.ivy2/cache/com.beachape/enumeratum-macros_2.12/jars/enumeratum-macros_2.12-1.5.9.jar:/Users/cbu/.ivy2/cache/com.typesafe.play/play_2.12/jars/play_2.12-2.6.0.jar:/Users/cbu/.ivy2/cache/com.typesafe.play/build-link/jars/build-link-2.6.0.jar:/Users/cbu/.ivy2/cache/com.typesafe.play/play-exceptions/jars/play-exceptions-2.6.0.jar:/Users/cbu/.ivy2/cache/com.typesafe.play/play-netty-utils/jars/play-netty-utils-2.6.0.jar:/Users/cbu/.ivy2/cache/org.slf4j/slf4j-api/jars/slf4j-api-1.7.25.jar:/Users/cbu/.ivy2/cache/org.slf4j/jul-to-slf4j/jars/jul-to-slf4j-1.7.25.jar:/Users/cbu/.ivy2/cache/org.slf4j/jcl-over-slf4j/jars/jcl-over-slf4j-1.7.25.jar:/Users/cbu/.ivy2/cache/com.typesafe.play/play-streams_2.12/jars/play-streams_2.12-2.6.0.jar:/Users/cbu/.ivy2/cache/org.reactivestreams/reactive-streams/jars/reactive-streams-1.0.0.jar:/Users/cbu/.ivy2/cache/com.typesafe.akka/akka-stream_2.12/jars/akka-stream_2.12-2.5.3.jar:/Users/cbu/.ivy2/cache/com.typesafe.akka/akka-actor_2.12/jars/akka-actor_2.12-2.5.3.jar:/Users/cbu/.ivy2/cache/com.typesafe/config/bundles/config-1.3.1.jar:/Users/cbu/.ivy2/cache/org.scala-lang.modules/scala-java8-compat_2.12/bundles/scala-java8-compat_2.12-0.8.0.jar:/Users/cbu/.ivy2/cache/com.typesafe/ssl-config-core_2.12/bundles/ssl-config-core_2.12-0.2.1.jar:/Users/cbu/.ivy2/cache/org.scala-lang.modules/scala-parser-combinators_2.12/bundles/scala-parser-combinators_2.12-1.0.6.jar:/Users/cbu/.ivy2/cache/com.typesafe.play/twirl-api_2.12/jars/twirl-api_2.12-1.3.2.jar:/Users/cbu/.ivy2/cache/org.scala-lang.modules/scala-xml_2.12/bundles/scala-xml_2.12-1.0.6.jar:/Users/cbu/.ivy2/cache/com.typesafe.akka/akka-slf4j_2.12/jars/akka-slf4j_2.12-2.5.3.jar:/Users/cbu/.ivy2/cache/com.fasterxml.jackson.core/jackson-core/bundles/jackson-core-2.8.9.jar:/Users/cbu/.ivy2/cache/com.fasterxml.jackson.core/jackson-annotations/bundles/jackson-annotations-2.8.9.jar:/Users/cbu/.ivy2/cache/com.fasterxml.jackson.core/jackson-databind/bundles/jackson-databind-2.8.9.jar:/Users/cbu/.ivy2/cache/com.fasterxml.jackson.datatype/jackson-datatype-jdk8/bundles/jackson-datatype-jdk8-2.8.9.jar:/Users/cbu/.ivy2/cache/com.fasterxml.jackson.datatype/jackson-datatype-jsr310/bundles/jackson-datatype-jsr310-2.8.9.jar:/Users/cbu/.ivy2/cache/commons-codec/commons-codec/jars/commons-codec-1.10.jar:/Users/cbu/.ivy2/cache/com.google.guava/guava/bundles/guava-22.0.jar:/Users/cbu/.ivy2/cache/com.google.code.findbugs/jsr305/jars/jsr305-1.3.9.jar:/Users/cbu/.ivy2/cache/com.google.errorprone/error_prone_annotations/jars/error_prone_annotations-2.0.18.jar:/Users/cbu/.ivy2/cache/com.google.j2objc/j2objc-annotations/jars/j2objc-annotations-1.1.jar:/Users/cbu/.ivy2/cache/org.codehaus.mojo/animal-sniffer-annotations/jars/animal-sniffer-annotations-1.14.jar:/Users/cbu/.ivy2/cache/io.jsonwebtoken/jjwt/jars/jjwt-0.7.0.jar:/Users/cbu/.ivy2/cache/org.apache.commons/commons-lang3/jars/commons-lang3-3.6.jar:/Users/cbu/.ivy2/cache/javax.transaction/jta/jars/jta-1.1.jar:/Users/cbu/.ivy2/cache/javax.inject/javax.inject/jars/javax.inject-1.jar[0m
+[0m[[0m[0mdebug[0m] [0m[0mScala compilation took 0.787746829 s[0m
+[0m[[0m[0minfo[0m] [0m[0mDone compiling.[0m
