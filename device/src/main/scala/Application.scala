@@ -19,5 +19,5 @@ object Application extends App {
     }
   })
 
-  kaaClient.subt
+//  kaaClient.subt
 }
