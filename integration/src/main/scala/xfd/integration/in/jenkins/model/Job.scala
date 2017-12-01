@@ -1,6 +1,6 @@
 package xfd.integration.in.jenkins.model
 
-case class Job(
+private[jenkins] case class Job(
     name: String,
     url: String,
     fullName: String,

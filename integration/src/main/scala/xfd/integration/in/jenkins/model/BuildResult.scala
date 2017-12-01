@@ -6,7 +6,7 @@ import enumeratum.{Enum, EnumEntry}
 
 sealed trait BuildResult extends EnumEntry
 
-object BuildResult extends Enum[BuildResult] {
+private[jenkins] object BuildResult extends Enum[BuildResult] {
 
   case object FAILURE extends BuildResult
 

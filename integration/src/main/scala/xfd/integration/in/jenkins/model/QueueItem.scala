@@ -2,7 +2,7 @@ package xfd.integration.in.jenkins.model
 
 import spray.json.JsObject
 
-case class QueueItem(
+private[jenkins]case class QueueItem(
   actions: Seq[JsObject], // TODO QueueItemActions
   blocked: Boolean,
   buildable: Boolean,

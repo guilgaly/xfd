@@ -2,7 +2,7 @@ package xfd.integration.in.jenkins.model
 
 import spray.json.JsObject
 
-case class BuildWithDetails(
+private[jenkins] case class BuildWithDetails(
     actions: Seq[JsObject],
     building: Boolean,
     description: String,

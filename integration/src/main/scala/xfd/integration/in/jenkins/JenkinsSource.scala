@@ -14,16 +14,14 @@ import akka.stream._
 import akka.stream.scaladsl._
 import xfd.integration.in.jenkins.model.{BuildWithDetails, JobWithDetails}
 
-object JenkinsSource extends JsonSupport {
+private[jenkins] object JenkinsSource extends JsonSupport {
 
-  def apply()(
+  def apply(jenkinsSettings: JenkinsSettings)(
       implicit
       system: ActorSystem,
       materializer: ActorMaterializer,
       executionContext: ExecutionContext
   ): Source[(JobWithDetails, Option[BuildWithDetails]), Cancellable] = {
-
-    val jenkinsSettings = JenkinsSettings(system.settings.config)
 
     val authorizationHeader =
       headers.Authorization(

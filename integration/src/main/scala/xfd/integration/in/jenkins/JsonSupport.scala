@@ -3,23 +3,15 @@ package xfd.integration.in.jenkins
 import akka.http.scaladsl.marshallers.sprayjson.SprayJsonSupport
 import spray.json._
 import xfd.integration.in.jenkins.model._
+import xfd.integration.util.JsonUtils
 
-trait JsonSupport extends SprayJsonSupport {
+private[jenkins] trait JsonSupport extends SprayJsonSupport {
 
   private val jsonProtocol = new DefaultJsonProtocol with NullOptions
   import jsonProtocol._
 
   implicit val buildResultFormat: JsonFormat[BuildResult] =
-    new JsonFormat[BuildResult] {
-      override def read(json: JsValue): BuildResult = json match {
-        case JsString(str) =>
-          BuildResult.namesToValuesMap
-            .getOrElse(str, deserializationError("Invalid BuildResult"))
-        case _ => deserializationError("BuildResult should be a string")
-      }
-
-      override def write(obj: BuildResult): JsValue = JsString(obj.toString)
-    }
+    JsonUtils.enumFormat(BuildResult)
   implicit val buildFormat: RootJsonFormat[Build] =
     jsonFormat3(Build)
   implicit val queueItemFormat: RootJsonFormat[QueueItem] =

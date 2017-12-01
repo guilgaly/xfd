@@ -5,7 +5,7 @@ import scala.concurrent.duration.FiniteDuration
 
 import com.typesafe.config.Config
 
-case class JenkinsSettings(conf: Config) {
+private[jenkins] case class JenkinsSettings(conf: Config) {
 
   private val rootPath = "application.jenkins"
 

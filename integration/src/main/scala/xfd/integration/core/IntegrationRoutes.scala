@@ -6,7 +6,7 @@ import akka.Done
 import akka.actor.ActorSystem
 import akka.stream._
 import akka.stream.scaladsl._
-import xfd.integration.in.jenkins.JenkinsSource
+import xfd.integration.in.jenkins.JenkinsModule
 
 object IntegrationRoutes {
 
@@ -16,7 +16,7 @@ object IntegrationRoutes {
       materializer: ActorMaterializer,
       executionContext: ExecutionContext
   ): Future[Done] = {
-    val jenkinsSource = JenkinsSource()
+    val jenkinsSource = JenkinsModule.integrationSource
 
     jenkinsSource.runWith(Sink.foreach(println))
   }
