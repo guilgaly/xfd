@@ -1,18 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <configuration>
-
     <property resource="logging.properties" />
 
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <!--<pattern>%d{ISO8601} [%thread] %-5level %logger{36} - %msg%n</pattern>-->
             <pattern>%d{ISO8601} %-5level %logger{36} - %msg%n</pattern>
         </encoder>
     </appender>
 
 
-    <logger name="org.kaaproject" level="DEBUG" additivity="false">
+    <logger name="org.kaaproject" level="WARN" additivity="false">
         <appender-ref ref="STDOUT" />
     </logger>
 

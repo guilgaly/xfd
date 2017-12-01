@@ -1,8 +1,6 @@
-
+import device.EndpointID
 
 object Application extends App {
-
-  val jenkinsKaaEndpoint = new JenkinsKaaEndpoint()
-  jenkinsKaaEndpoint.client.start()
-
+  val jenkinsKaaEndpoint = JenkinsKaaEndpoint(EndpointID("abc123"))
+  jenkinsKaaEndpoint.kaaClient.start()
 }
