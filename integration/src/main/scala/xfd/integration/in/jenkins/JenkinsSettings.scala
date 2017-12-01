@@ -20,5 +20,5 @@ private[jenkins] case class JenkinsSettings(conf: Config) {
 
   val password: String = conf.getString(s"$rootPath.password")
 
-  val jobName: String = conf.getString(s"$rootPath.jobName")
+  val jobPath: String = conf.getString(s"$rootPath.jobPath")
 }
