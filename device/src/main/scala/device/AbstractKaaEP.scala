@@ -17,20 +17,7 @@ import org.kaaproject.kaa.client.logging.LogUploadStrategyDecision
 import org.kaaproject.kaa.common.endpoint.gen.{SyncResponseResultType, UserAttachResponse}
 import org.kaaproject.kaa.client.{KaaClient, KaaClientStateListener}
 import org.kaaproject.kaa.client.profile.ProfileContainer
-import xfd.profile.Project
-
-//case class EndpointProfile[P <: SpecificRecordBase](record: P)
-//case class EndpointConfiguration[C <: SpecificRecordBase](state: C)
-//case class KaaEndpointState[PROFILE: EndpointProfile] private(
-//  profile: Option[PROFILE],
-////  configuration: Option[CONFIGURATION],
-//  listeners: Seq[EndpointID]
-//) {
-//  def updateWith(diff: KaaEndpointState[PROFILE]) = this.copy(
-//    profile = diff.profile orElse this.profile,
-//    listeners = diff.listeners
-//  )
-//}
+import xfd.jenkins.Project
 
 trait KaaEndpoint[
 P <: SpecificRecordBase
@@ -49,24 +36,21 @@ P <: SpecificRecordBase
   def stateListener: KaaClientStateListener
   def logUploadStrategy: LogUploadStrategy
   def endpointProfile: Project
-
-  //  def configurationListener: ConfigurationListener
-  //  val emitsEvents: Seq[KaaEvent]
 }
 
 object KaaEndpoint {
-  val ENDPOINTS_DIR = "xdf/endpoints"
+  val ENDPOINTS_DIR = "device/endpoints"
 }
 
-abstract class AbtractKaaEndpoint[P <: SpecificRecordBase] extends KaaEndpoint[P] {
+abstract class AbstractKaaEndpoint[P <: SpecificRecordBase] extends KaaEndpoint[P] {
   
   val endpointDir: String = s"${KaaEndpoint.ENDPOINTS_DIR}/$id"
   val stateListener: KaaClientStateListener = new DefaultAbstractKaaEPStateListener()
 
-  var client = setKaaClient()
+//  var client = setKaaClient()
 //  var state = KaaEndpointState[Profile](None, Seq.empty)
 
-  private def setKaaClient(): KaaClient = {
+  protected def setKaaClient(): KaaClient = {
     val properties: KaaClientProperties = new KaaClientProperties()
     properties.setWorkingDirectory(endpointDir)
     println(s"EP working directory: ${properties.getWorkingDirectory}")
@@ -92,12 +76,12 @@ abstract class AbtractKaaEndpoint[P <: SpecificRecordBase] extends KaaEndpoint[P
       override def onAttachResult(response: UserAttachResponse): Unit = {
         response.getResult match {
           case SyncResponseResultType.SUCCESS => {
-            println("User successfully attached.")
-//            refreshEventListeners() // not used here/now
+            println("User successfully attached!")
           }
           case SyncResponseResultType.FAILURE => println(s"Error while attaching user, error ${response.getErrorCode}:\n${response.getErrorReason}")
           case SyncResponseResultType.PROFILE_RESYNC => println("User resync success.\n")
           case SyncResponseResultType.REDIRECT => println("User redirect.")
+          case _ => println("WTF")
         }
       }
     })
@@ -132,20 +116,10 @@ abstract class AbtractKaaEndpoint[P <: SpecificRecordBase] extends KaaEndpoint[P
     }
   }
 
-  /*override def configurationListener: ConfigurationListener = {
-    new ConfigurationListener() {
-      @Override
-      def onConfigurationUpdate(emptyData: EmptyData) {
-        println(s"New configuration but no handler");
-      }
-    }
-  }*/
-
   protected class DefaultAbstractKaaEPStateListener extends KaaClientStateListener {
     override def onStarted(): Unit = {
       println(s"Kaa EP [$id] started.")
       attachUser("bogus", "smogus")
-      // trigger find event listeners if needed/used here
     }
     
     override def onStartFailure(e: KaaException): Unit = {

@@ -4,7 +4,7 @@
 		module="device$sources"
 		revision="0.1"
 		status="integration"
-		publication="20171201105223"
+		publication="20171201114402"
 	/>
 	<configurations>
 		<conf name="compile" visibility="public" description=""/>

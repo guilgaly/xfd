@@ -7,7 +7,7 @@
 		revision="0.1"
 		conf="test-internal"
 		confs="compile, runtime, test, provided, optional, compile-internal, runtime-internal, test-internal, plugin, pom, scala-tool"
-		date="20171201105223"/>
+		date="20171201114402"/>
 	<dependencies>
 		<module organisation="com.beachape" name="enumeratum-play_2.12">
 			<revision name="1.5.12" status="release" pubdate="20170624165918" resolver="sbt-chain" artresolver="sbt-chain" homepage="https://github.com/lloydmeta/enumeratum" downloaded="false" searched="false" default="false" conf="default, compile, runtime, default(compile), master" position="40">

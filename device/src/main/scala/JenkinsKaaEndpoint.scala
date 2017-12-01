@@ -1,23 +1,24 @@
-import device.{AbtractKaaEndpoint, EndpointID}
-import org.kaaproject.kaa.client.notification.NotificationTopicListListener
-import org.kaaproject.kaa.client.profile.ProfileContainer
-import org.kaaproject.kaa.common.endpoint.gen.Topic
-import xfd.profile.Project
+import device.{AbstractKaaEndpoint, EndpointID}
+import org.kaaproject.kaa.client.notification.{NotificationListener}
+import xfd.jenkins.{Build, Project}
 
 
-class JenkinsKaaEndpoint extends AbtractKaaEndpoint[Project] {
+class JenkinsKaaEndpoint extends AbstractKaaEndpoint[Project] {
 
   override def id = EndpointID("abc123")
+  var client = setKaaClient()
 
   override def endpointProfile = Project.newBuilder()
       .setName("myTeam")
       .build()
 
-  client.addTopicListListener(new NotificationTopicListListener() {
-    def onListUpdated(topics: java.util.List[Topic]): Unit = {
-      topics.forEach { topic =>
-        printf("Id: %s, name: %s, type: %s", topic.getId, topic.getName, topic.getSubscriptionType)
-      }
+  client.addNotificationListener(1l, new NotificationListener() {
+    override def onNotification(topicId: Long, buildStatus: Build): Unit = {
+      val msg = (buildStatus.getStatus, buildStatus.getProgress) match {
+        case ("building", progress) => s"Building ($progress)"
+        case (status, _) => s"Build status: ${status}"
+    }
+      println(msg)
     }
   })
 }
