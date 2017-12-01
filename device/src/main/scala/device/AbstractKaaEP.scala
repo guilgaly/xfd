@@ -1,6 +1,7 @@
 package device
 
 import java.io.IOException
+import java.util.UUID
 
 import org.apache.avro.specific.SpecificRecordBase
 import org.kaaproject.kaa.client._
@@ -19,22 +20,17 @@ import org.kaaproject.kaa.client.{KaaClient, KaaClientStateListener}
 import org.kaaproject.kaa.client.profile.ProfileContainer
 import xfd.jenkins.Project
 
-trait KaaEndpoint[
-P <: SpecificRecordBase
-] extends Endpoint {
+final case class EndpointID(value: String) extends AnyVal
+object EndpointID {
+  def random(): EndpointID = EndpointID(UUID.randomUUID().toString)
+}
 
-//  type Profile = EndpointProfile[P]
-//  type Configuration = EndpointConfiguration[SpecificRecordBase]
-//  type State = KaaEndpointState[Profile]
+trait KaaEndpoint[P <: SpecificRecordBase] {
 
   type AccessToken = String
   type ExternalId = String
-  
-//  var state: KaaEndpointState[Profile]
-  var client: KaaClient
 
-  def stateListener: KaaClientStateListener
-  def logUploadStrategy: LogUploadStrategy
+  def id: EndpointID
   def endpointProfile: Project
 }
 
@@ -43,12 +39,12 @@ object KaaEndpoint {
 }
 
 abstract class AbstractKaaEndpoint[P <: SpecificRecordBase] extends KaaEndpoint[P] {
-  
-  val endpointDir: String = s"${KaaEndpoint.ENDPOINTS_DIR}/$id"
-  val stateListener: KaaClientStateListener = new DefaultAbstractKaaEPStateListener()
 
-//  var client = setKaaClient()
-//  var state = KaaEndpointState[Profile](None, Seq.empty)
+  private val endpointDir: String = s"${KaaEndpoint.ENDPOINTS_DIR}/$id"
+
+  protected val stateListener: KaaClientStateListener = defaultStateListener
+  protected val logUploadStrategy: LogUploadStrategy = defaultLogUploadStrategy
+  protected val kaaClient: KaaClient
 
   protected def setKaaClient(): KaaClient = {
     val properties: KaaClientProperties = new KaaClientProperties()
@@ -72,7 +68,7 @@ abstract class AbstractKaaEndpoint[P <: SpecificRecordBase] extends KaaEndpoint[
   
   protected def attachUser(externalId: ExternalId, accessToken: AccessToken): Unit = {
     println("Attaching user...")
-    client.attachUser(externalId, accessToken, new UserAttachCallback() {
+    kaaClient.attachUser(externalId, accessToken, new UserAttachCallback() {
       override def onAttachResult(response: UserAttachResponse): Unit = {
         response.getResult match {
           case SyncResponseResultType.SUCCESS => {
@@ -81,7 +77,6 @@ abstract class AbstractKaaEndpoint[P <: SpecificRecordBase] extends KaaEndpoint[
           case SyncResponseResultType.FAILURE => println(s"Error while attaching user, error ${response.getErrorCode}:\n${response.getErrorReason}")
           case SyncResponseResultType.PROFILE_RESYNC => println("User resync success.\n")
           case SyncResponseResultType.REDIRECT => println("User redirect.")
-          case _ => println("WTF")
         }
       }
     })
@@ -100,7 +95,7 @@ abstract class AbstractKaaEndpoint[P <: SpecificRecordBase] extends KaaEndpoint[
   protected def updateKaaEndpointProfile(): Unit = {
     println("Updating Kaa profile")
     try
-      client.updateProfile()
+      kaaClient.updateProfile()
     catch {
       case e: KaaRuntimeException =>
         // May occur if Kaa client state is not valid (I.E. not started)
@@ -108,7 +103,9 @@ abstract class AbstractKaaEndpoint[P <: SpecificRecordBase] extends KaaEndpoint[
     }
   }
 
-  def logUploadStrategy: LogUploadStrategy = {
+  lazy val defaultStateListener = new DefaultAbstractKaaEPStateListener()
+
+  lazy val defaultLogUploadStrategy: LogUploadStrategy = {
     new DefaultLogUploadStrategy() {
       override def isUploadNeeded(status: LogStorageStatus): LogUploadStrategyDecision = {
         if (status.getRecordCount >= 1) LogUploadStrategyDecision.UPLOAD else LogUploadStrategyDecision.NOOP
