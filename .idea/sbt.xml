@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ScalaSbtSettings">
+    <option name="linkedExternalProjectsSettings">
+      <SbtProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/device" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/device" />
+            <option value="$PROJECT_DIR$/device/project" />
+          </set>
+        </option>
+        <option name="sbtVersion" value="1.0.4" />
+        <option name="useAutoImport" value="true" />
+        <option name="useOurOwnAutoImport" value="true" />
+      </SbtProjectSettings>
+    </option>
+    <option name="maximumHeapSize" value="1524" />
+    <option name="vmParameters" value="-XX:MaxPermSize=512M" />
+  </component>
+</project>
