@@ -37,10 +37,10 @@ private[jenkins] object JenkinsSource extends JsonSupport {
         headers = immutable.Seq(authorizationHeader)
       )
 
-    val pollRequest = request(s"job/${jenkinsSettings.jobName}/api/json")
+    val pollRequest = request(s"${jenkinsSettings.jobPath}/api/json")
 
     def buildRequest(number: Int) =
-      request(s"job/${jenkinsSettings.jobName}/$number/api/json")
+      request(s"${jenkinsSettings.jobPath}/$number/api/json")
 
     Source
       .tick(0.seconds, jenkinsSettings.interval, ())
@@ -56,7 +56,10 @@ private[jenkins] object JenkinsSource extends JsonSupport {
             .to[JobWithDetails]
             .recover {
               case NonFatal(t) =>
-                println("JobWithDetails parsing error : " + t)
+                println("JobWithDetails parsing error")
+                t.printStackTrace()
+                println(
+                  s"JSON: ${entity.toStrict(5.seconds).map(_.data.utf8String)}")
                 throw t
             }
             .map(Some(_))
@@ -71,8 +74,10 @@ private[jenkins] object JenkinsSource extends JsonSupport {
       .mapAsync(1) { job =>
         job.lastCompletedBuild match {
           case Some(build) =>
+            val request = buildRequest(build.number)
+            println(s"fetching ${request.uri}")
             Http()
-              .singleRequest(buildRequest(build.number))
+              .singleRequest(request)
               .map(build => (job, Some(build)))
           case _ => Future.successful((job, None))
         }
@@ -83,7 +88,10 @@ private[jenkins] object JenkinsSource extends JsonSupport {
             .to[BuildWithDetails]
             .recover {
               case NonFatal(t) =>
-                println("JobWithDetails parsing error : " + t)
+                println("BuildWithDetails parsing error : ")
+                t.printStackTrace()
+                println(
+                  s"JSON: ${entity.toStrict(5.seconds).map(_.data.utf8String)}")
                 throw t
             }
             .map(build => (job, Some(build)))

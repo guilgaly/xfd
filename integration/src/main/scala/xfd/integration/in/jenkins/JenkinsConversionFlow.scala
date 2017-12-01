@@ -19,9 +19,9 @@ private[jenkins] object JenkinsConversionFlow {
       case (job, Some(build)) =>
         val buildStatus =
           build.result match {
-            case BuildResult.SUCCESS => BuildStatus.Success
-            case BuildResult.UNKNOWN => BuildStatus.Unknown
-            case _                   => BuildStatus.Failed
+            case Some(BuildResult.SUCCESS) => BuildStatus.Success
+            case Some(BuildResult.FAILURE) => BuildStatus.Failed
+            case _                         => BuildStatus.Unknown
           }
         ProjectStatus(job.name, CiStatus(buildStatus))
       case (job, _) => ProjectStatus(job.name, CiStatus(BuildStatus.Unknown))
