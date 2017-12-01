@@ -16,6 +16,7 @@ project/plugins/project/
 .cache
 .lib/
 
+kaa/docker-data/
 /.gitignore
 .idea/
 device/.idea/inspectionProfiles/
