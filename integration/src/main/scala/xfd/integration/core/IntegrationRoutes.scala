@@ -7,6 +7,7 @@ import akka.actor.ActorSystem
 import akka.stream._
 import akka.stream.scaladsl._
 import xfd.integration.in.jenkins.JenkinsModule
+import xfd.integration.out.KaaFlow
 
 object IntegrationRoutes {
 
@@ -18,6 +19,8 @@ object IntegrationRoutes {
   ): Future[Done] = {
     val jenkinsSource = JenkinsModule.integrationSource
 
-    jenkinsSource.runWith(Sink.foreach(println))
+    jenkinsSource
+      .via(KaaFlow())
+      .runWith(Sink.foreach(println))
   }
 }

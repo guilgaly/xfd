@@ -3,10 +3,11 @@ package xfd.integration.in.jenkins
 import scala.collection.immutable
 import scala.concurrent.duration._
 import scala.concurrent.{ExecutionContext, Future}
+import scala.util.Success
 import scala.util.control.NonFatal
 
 import akka.actor.{ActorSystem, Cancellable}
-import akka.http.scaladsl.Http
+import akka.http.scaladsl._
 import akka.http.scaladsl.model._
 import akka.http.scaladsl.model.headers.BasicHttpCredentials
 import akka.http.scaladsl.unmarshalling.Unmarshal
@@ -62,7 +63,12 @@ private[jenkins] object JenkinsSource extends JsonSupport {
                   s"JSON: ${entity.toStrict(5.seconds).map(_.data.utf8String)}")
                 throw t
             }
-            .map(Some(_))
+            .transform {
+              case Success(job) => Success(Some(job))
+              case _            => Success(None)
+            }
+
+        //.map(Some(_))
         case _ =>
           Future.successful(None)
       }
